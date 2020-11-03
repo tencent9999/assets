@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.aboutMapper">
+    <insert id="insertassers" parameterType="com.ssm.pojo.AssetsAdd">
+        insert into about (about_name, about_time, about_msg)
+        values (#{about_name}, #{about_time}, #{about_msg})
+    </insert>
+
+</mapper>

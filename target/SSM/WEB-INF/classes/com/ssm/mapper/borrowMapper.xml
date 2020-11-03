@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.borrowMapper">
+    <insert id="insertborrow" parameterType="com.ssm.pojo.borrow">
+        insert into borrow (borrow_time1, borrow_user, borrow_money, borrow_time2, Aid, borrow_msg, borrow_on)
+        values (#{borrow_time1}, #{borrow_user}, #{borrow_money}, #{borrow_time2}, #{Aid}, #{borrow_msg}, #{borrow_on})
+    </insert>
+    <update id="updateon" parameterType="com.ssm.pojo.AssetsAdd">
+        update AssetsAdd
+        set assetsAdd_borrow=1
+        where id = #{id}
+    </update>
+    <update id="updateoff" parameterType="com.ssm.pojo.AssetsAdd">
+        update AssetsAdd
+        set assetsAdd_borrow=0
+        where id = #{id}
+    </update>
+    <resultMap id="BorrowAdd" type="com.ssm.pojo.borrow">
+        <id property="id" column="id"></id>
+        <result property="borrow_time1" column="borrow_time1"></result>
+        <result property="borrow_user" column="borrow_user"></result>
+        <result property="borrow_money" column="borrow_money"></result>
+        <result property="Aid" column="Aid"></result>
+        <result property="borrow_on" column="borrow_on"></result>
+        <collection property="AssetsAdd" ofType="com.ssm.pojo.AssetsAdd">
+            <result property="assetsAdd_name" column="assetsAdd_name"></result>
+            <result property="assetsAdd_class" column="assetsAdd_class"></result>
+            <result property="assetsAdd_borrow" column="assetsAdd_borrow"></result>
+            <result property="id" column="id"></result>
+
+        </collection>
+    </resultMap>
+    <select id="selectBorrowList" resultMap="BorrowAdd">
+        select b.*, a.assetsAdd_borrow,a.assetsAdd_class,a.assetsAdd_name
+        from AssetsAdd a,
+             borrow b
+        where
+            b.Aid = a.id
+    </select>
+    <update id="updateborrowtime" parameterType="com.ssm.pojo.borrow">
+        update borrow
+        set borrow_time2=#{borrow_time2},
+            borrow_on   = #{borrow_on}
+        where id = #{id}
+    </update>
+    <select id="select1" parameterType="com.ssm.pojo.borrow" resultType="com.ssm.pojo.borrow">
+        select *
+        from borrow
+        where
+            id = #{id}
+    </select>
+</mapper>

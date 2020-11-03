@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.assetsAddMapper">
+    <insert id="insertassers" parameterType="com.ssm.pojo.AssetsAdd">
+        insert into assetsAdd (assetsAdd_name, assetsAdd_class, assetsAdd_time, assetsAdd_user, assetsAdd_msg)
+        values (#{assetsAdd_name}, #{assetsAdd_class}, #{assetsAdd_time}, #{assetsAdd_user}, #{assetsAdd_msg})
+    </insert>
+    <select id="selectClass" parameterType="com.ssm.pojo.AssetsClass" resultType="com.ssm.pojo.AssetsClass">
+        select *
+        from assetsClass
+    </select>
+    <select id="selectAdd" parameterType="com.ssm.pojo.AssetsAdd" resultType="com.ssm.pojo.AssetsAdd">
+        select *
+        from assetsAdd
+    </select>
+    <select id="selectByid" parameterType="com.ssm.pojo.AssetsAdd" resultType="com.ssm.pojo.AssetsAdd">
+        select *
+        from assetsAdd
+        where id = #{id}
+    </select>
+    <delete id="delByid" parameterType="int">
+        delete
+        from assetsAdd
+        where id = #{id}
+    </delete>
+    <update id="updateByid" parameterType="com.ssm.pojo.AssetsAdd">
+        update assetsAdd
+        set assetsAdd_name=#{assetsAdd_name},
+            assetsAdd_msg=#{assetsAdd_msg}
+        where id = #{id}
+    </update>
+</mapper>
